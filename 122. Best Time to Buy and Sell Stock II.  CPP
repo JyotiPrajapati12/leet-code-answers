@@ -1,0 +1,23 @@
+// 122. Best Time to Buy and Sell Stock II
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        int sum=0;
+        int buy=0;
+        bool check=false;
+        for(int i=0;i<n-1;i++){  
+            if(prices[i]<prices[i+1]){
+                buy=prices[i];
+                check=true;
+            }
+            if(buy<prices[i+1] && check){
+                sum=sum+(prices[i+1]-buy);
+                buy=0;
+                check=false;
+            }
+        }
+        return sum;
+    }
+};
