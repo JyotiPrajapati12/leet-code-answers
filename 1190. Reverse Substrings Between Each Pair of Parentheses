@@ -12,7 +12,6 @@ public:
                 // Erase the ')' first, then the '('
                 s.erase(s.begin() + i);
                 s.erase(s.begin() + l);
-                // Adjust the index to the correct position after erasure
                 i -= 2;
             }
         }
