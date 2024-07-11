@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string reverseParentheses(string s) {
+        stack<int> st;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(') {
+                st.push(i);
+            } else if (s[i] == ')') {
+                int l = st.top();
+                st.pop();
+                reverse(s.begin() + l + 1, s.begin() + i);
+                // Erase the ')' first, then the '('
+                s.erase(s.begin() + i);
+                s.erase(s.begin() + l);
+                // Adjust the index to the correct position after erasure
+                i -= 2;
+            }
+        }
+        return s;
+    }
+};
