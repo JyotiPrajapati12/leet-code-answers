@@ -6,7 +6,6 @@ public:
         int n = s.size();
         vector<bool> remove(n, false);
 
-        // Pass 1: Mark invalid closing parentheses
         for (int i = 0; i < n; ++i) {
             if (s[i] == '(') {
                 st.push(i);
@@ -19,13 +18,11 @@ public:
             }
         }
 
-        // Pass 2: Mark remaining invalid opening parentheses
         while (!st.empty()) {
             remove[st.top()] = true;
             st.pop();
         }
 
-        // Construct the resulting string
         string result;
         for (int i = 0; i < n; ++i) {
             if (!remove[i]) {
