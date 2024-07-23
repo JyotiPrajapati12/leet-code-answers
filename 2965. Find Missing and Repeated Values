@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        int r=grid.size();
+        int c=grid[0].size();
+        vector<int>vec(c*r+1,0);
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                vec[grid[i][j]]+=1;
+            }
+        }
+        int a,b;
+        for(int i=1;i<c*r+1;i++){
+            if(vec[i]==0)
+            a=i;
+            if(vec[i]==2)
+            b=i;
+        }
+        return {b,a};
+    }
+};
