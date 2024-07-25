@@ -1,0 +1,64 @@
+class Solution {
+public:
+int ref(int num, vector<int>& mapping) {
+    int ans = 0;
+    int place = 1;
+    if (num == 0) {
+        return mapping[0];
+    }
+
+    while (num > 0) {
+        int digit = num % 10;
+        ans += mapping[digit] * place;
+        num /= 10;
+        place *= 10;
+    }
+
+    return ans;
+}
+
+    vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
+       vector<pair<int, int>> vec;
+    for (int num : nums) {
+        vec.push_back({num, ref(num, mapping)});
+    }
+     auto comp=[&](const pair<int,int>&a,const pair<int,int>& b){
+            return a.second<b.second;
+        };
+        sort(vec.begin(),vec.end(),comp);
+        vector<int>ans;
+        for(auto it:vec){
+            ans.push_back(it.first);
+        }
+        return ans;
+    }
+};
+
+// static const int __ = [](){
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(nullptr);
+//     cout.tie(nullptr);
+//     return 0;
+// }();
+// class Solution {
+// public:
+//     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
+//         unordered_map<int,int>mp;
+//         for(auto b:nums){
+//         if(mp[b]!=0)
+//         continue;
+//         if(b==0)
+//         mp[b]=mapping[b];
+//         int a=b,i=1;
+//             while(a){
+//                 mp[b]+=mapping[a%10]*i;
+//                 a/=10;
+//                 i*=10;
+//             }
+//         }
+//         sort(nums.begin(),nums.end(),[&](int a,int b){
+//             return mp[a]<mp[b];
+//         });
+//         return nums;
+//     }
+// };
