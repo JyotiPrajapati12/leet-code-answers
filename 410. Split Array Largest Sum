@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int partition(vector<int>& nums, int lmt){
+        int parts=1,sum=0;
+        for(int i=0;i<nums.size();i++){
+            if(sum+nums[i]<=lmt){
+                sum+=nums[i];
+            }
+            else{
+                parts++;
+                sum=nums[i];
+            }
+        }
+        return parts;
+    }
+    int splitArray(vector<int>& nums, int k) {
+        int mx=*max_element(nums.begin(),nums.end());
+        int sum=accumulate(nums.begin(),nums.end(),0);
+        int low=mx,high=sum,mid;
+        while(low<=high){
+            mid=(low+high)/2;
+            int parts=partition(nums,mid);
+            if(parts<=k)
+            high=mid-1;
+            else
+            low=mid+1;
+
+        }
+        return low;
+    }
+};
