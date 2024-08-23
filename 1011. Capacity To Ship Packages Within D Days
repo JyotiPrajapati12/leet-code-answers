@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int duration(vector<int>& weights, int w){
+        int temp=0,ans=1;
+        for(int i=0;i<weights.size();i++){
+            temp+=weights[i];
+            if(temp>w){
+                ans++;
+                temp=weights[i];
+            }
+        }
+        return ans;
+    }
+    int shipWithinDays(vector<int>& weights, int days) {
+        int n=weights.size(),sum=0;
+        for(int i=0;i<n;i++)
+            sum+=weights[i];
+        int low=*max_element(weights.begin(),weights.end()),high=sum, mid;
+        while(low<=high){
+            mid=(low+high)/2;
+            int count=duration(weights,mid);
+            
+            if(count>days)
+            low=mid+1;
+            else
+            high=mid-1;
+
+        }
+        return low;
+    }
+};
