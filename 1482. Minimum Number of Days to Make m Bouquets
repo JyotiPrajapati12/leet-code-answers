@@ -1,0 +1,36 @@
+class Solution {
+public:
+bool possible(vector<int>&bloomDay,int day,int m,int k){
+                int count=0,bq=0;
+            for(int j=0;j<bloomDay.size();j++){
+                if(bloomDay[j]-day<1 ){
+                    count++;
+                }
+                else
+                count=0;
+            if(count==k){
+                bq++;
+                count=0;
+            }
+            }
+            if(bq>=m)
+            return true;
+            return false;
+}
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int ans=0;
+        int n=*max_element(bloomDay.begin(),bloomDay.end());
+        int mn=*min_element(bloomDay.begin(),bloomDay.end());
+        int low=mn,high=n,mid;
+        long long val=m*1LL*k*1LL;
+        if(val>bloomDay.size()) return -1;
+        while(low<=high){
+            mid=(low+high)/2;
+            if(possible(bloomDay,mid,m,k)){
+                high=mid-1;
+            }
+            else low=mid+1;
+        }
+        return low;
+    }
+};
