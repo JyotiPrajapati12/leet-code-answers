@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string largestOddNumber(string num) {
+        string odd="13579",ans="";
+        int ind;
+        bool flag=false;
+        for(int i=num.size()-1;i>=0;i--){
+            
+            for(int j=0;j<5;j++)
+                if(odd[j]==num[i]){
+                    flag=true;
+                    ind=i;
+                }
+            if(flag){
+                break;
+            }
+        }
+        if(flag)
+        return num.substr(0,ind+1);
+        else return "";
+    }
+};
