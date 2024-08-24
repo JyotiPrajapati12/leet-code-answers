@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+       if(asteroids.size()==1)
+       return asteroids;
+       bool flag=false;
+       for(int i=1;i<asteroids.size();i++){
+            if(asteroids[i-1]>0 && asteroids[i]<0){
+                flag=true;
+                break;
+            }
+       }
+       if(!flag)
+       return asteroids;
+        vector<int>vec;
+      //  vec.push_back(asteroids[0]);
+        for(int i=0;i<asteroids.size();i++){
+            if(vec.size()==0)
+            vec.push_back(asteroids[i]);
+            else if(vec.back()>0 && asteroids[i]<0){
+                if(vec.back()== -asteroids[i])
+                vec.pop_back();
+                else
+                vec.back()=asteroids[i]*(-1)>vec.back()?asteroids[i]:vec.back();
+            }   
+            else
+            vec.push_back(asteroids[i]);
+        }
+        return asteroidCollision(vec);
+    }
+};
