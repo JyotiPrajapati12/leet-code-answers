@@ -1,0 +1,25 @@
+class Solution {
+public:
+int mod=1000000007;
+
+    int modExp(long long base,long long exp,int mod){
+        long long result=1;
+        while(exp>0){
+            if(exp%2==1)
+                result=(result*base)%mod;
+                base=(base*base)%mod;
+                exp/=2;
+        
+        }
+        return result;
+    }
+    int countGoodNumbers(long long n) {
+        long long evencount=(n+1)/2;
+        long long oddcount=n/2;
+
+        long long even=modExp(5,evencount,mod);
+        long long odd=modExp(4,oddcount,mod);
+
+        return (even*odd)%mod;
+    }
+};
