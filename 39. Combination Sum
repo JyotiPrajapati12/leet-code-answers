@@ -1,0 +1,23 @@
+class Solution {
+public:
+void cs(vector<int>&vec,vector<vector<int>>&ans,vector<int>& candidates, int target,int ind){
+    if(ind==candidates.size()){
+        if(target==0)
+        ans.push_back(vec);
+        return ;
+    }
+        if(candidates[ind]<=target){
+            vec.push_back(candidates[ind]);
+            cs(vec,ans,candidates,target-candidates[ind],ind);
+            vec.pop_back();
+        }
+        cs(vec,ans,candidates,target,ind+1);
+    
+}
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>>ans;
+        vector<int>vec;
+         cs(vec,ans,candidates,target,0);
+        return ans;
+    }
+};
