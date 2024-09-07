@@ -1,0 +1,23 @@
+class Solution {
+public:
+void cs(vector<int>& cands,vector<vector<int>>&ans,vector<int>vec, int target,int ind){
+    if(target==0){
+        ans.push_back(vec);
+        return;
+    }
+    for(int i=ind;i<cands.size();i++){
+        if(i>ind && cands[i]==cands[i-1]) continue;
+        if(cands[i]>target) break;
+        vec.push_back(cands[i]);
+        cs(cands,ans,vec,target-cands[i],i+1);
+        vec.pop_back();
+    }
+}
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        vector<vector<int>>ans;
+        vector<int>vec;
+        cs(candidates,ans,vec,target,0);
+        return ans;
+    }
+};
