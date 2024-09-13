@@ -1,0 +1,21 @@
+class Solution {
+public:
+    void swp(vector<vector<int>>&ans,vector<int>&vec,vector<int>&nums,int ind){
+        ans.push_back(vec);
+        for(int i=ind;i<nums.size();i++){
+        if(i!=ind && nums[i]==nums[i-1])continue;
+        vec.push_back(nums[i]);
+        swp(ans,vec,nums,i+1);
+        vec.pop_back();
+        }
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+      //  set<vector<int>>ans;
+        vector<vector<int>>ans;
+        vector<int>vec;
+        sort(nums.begin(),nums.end());
+         swp(ans,vec,nums,0); 
+         return ans;
+
+    }
+};
