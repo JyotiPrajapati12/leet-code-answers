@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int solve(vector<int>& nums, int target, int ind) {
+        // Base case: if the target is 0 and we've processed all numbers
+        if (ind < 0) {
+            return target == 0 ? 1 : 0;
+        }
+        
+        // Try adding and subtracting the current number and recurse
+        int minus = solve(nums, target - nums[ind], ind - 1);
+        int plus = solve(nums, target + nums[ind], ind - 1);
+        
+        // Sum up the results of both the plus and minus branches
+        return plus + minus;
+    }
+
+    int findTargetSumWays(vector<int>& nums, int target) {
+        return solve(nums, target, nums.size() - 1);
+    }
+};
