@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int mod=1e9+7;
+    int sumSubarrayMins(vector<int>& arr) {
+        int n=arr.size();
+        vector<int>minnext(n);
+        vector<int>minprev(n);
+        stack<int>stnext;
+        stack<int>stprev;
+        int mn=INT_MAX;
+        for(int i=0;i<n;i++){
+            while(!stprev.empty() && arr[i]<=arr[stprev.top()]) stprev.pop();
+            if(stprev.empty()) minprev[i]=-1;
+            else
+            minprev[i]=stprev.top();
+            stprev.push(i);
+        }
+        
+        mn=INT_MAX;
+        for(int i=n-1;i>=0;i--){
+            while(!stnext.empty() && arr[i]<arr[stnext.top()]) stnext.pop();
+            if(stnext.empty()) minnext[i]=n;
+            else minnext[i]=stnext.top();
+            stnext.push(i);
+        }
+        int ans=0;
+        for(int i=0;i<n;i++){
+            long l=i-minprev[i];
+            long r=minnext[i]-i;
+            ans=(ans + arr[i]*l*r)%mod;
+        }
+        return ans;
+
+    }
+};
