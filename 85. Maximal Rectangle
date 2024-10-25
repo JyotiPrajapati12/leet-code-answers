@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int histogramArea(vector<int>vec){
+        int n=vec.size();
+        vector<int>premin(n);
+        vector<int>next(n);
+
+        stack<int>pst;
+        stack<int>nst;
+
+        int mn=INT_MAX;
+        for(int i=0;i<n;i++){
+            while(!pst.empty() && vec[pst.top()]>=vec[i]) pst.pop();
+            if(pst.empty()) premin[i]=-1;
+            else premin[i]=pst.top();
+            pst.push(i);
+        }
+        mn=INT_MAX;
+        for(int i=n-1;i>=0;i--){
+            while(!nst.empty() && vec[nst.top()]>=vec[i]) nst.pop();
+            if(nst.empty()) next[i]=n;
+            else next[i]=nst.top();
+            nst.push(i);
+        }
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum=max(sum,vec[i]*(next[i]-premin[i]-1));
+        }
+        return sum;
+    }
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int row=matrix.size();
+        int col=matrix[0].size();
+        vector<vector<int>>presum(row,vector<int>(col));
+        for(int i=0;i<col;i++){
+            int sum=0;
+            for(int j=0;j<row;j++){
+                sum++;
+                if(matrix[j][i]=='0')
+                sum=0;
+                presum[j][i]=sum;
+            }
+        }
+        int ans=0;
+        for(int i=0;i<row;i++){
+            ans=max(ans,histogramArea(presum[i]));
+        }
+        return ans;
+    }
+};
