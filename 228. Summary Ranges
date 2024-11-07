@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& nums) {
+        vector<string> ans;
+        int n = nums.size();
+        int left = 0, right = 0;
+
+        while (left < n && right < n) {
+            // Move `right` to find the end of a continuous range
+            while (right < n - 1 && nums[right] == nums[right + 1] - 1) {
+                right++;
+            }
+
+            // Build the range string
+            string str;
+            if (left != right) {
+                str += to_string(nums[left]) + "->" + to_string(nums[right]);
+            } else {
+                str += to_string(nums[left]);
+            }
+            ans.push_back(str);
+
+            // Move to the next range
+            right++;
+            left = right;
+        }
+
+        return ans;
+    }
+};
