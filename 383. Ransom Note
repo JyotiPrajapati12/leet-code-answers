@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        // map<char,int>rn;
+        // map<char,int>mgz;
+        // for(int i=0;i<ransomNote.size();i++ )
+        // rn[ransomNote[i]]++;
+        // for(int i=0;i<magazine.size();i++)
+        // mgz[magazine[i]]++;
+        // for(int i=0;i<ransomNote.size();i++){
+        //     if(rn[ransomNote[i]]<=mgz[ransomNote[i]])
+        //     continue;
+        //     else
+        //     return false;
+        // }
+        // return true;
+
+        for(int i=0;i<ransomNote.size();i++){
+            size_t temp=magazine.find(ransomNote[i]);
+            if(temp!=string::npos){
+                magazine.erase(temp,1);
+            }else return false;
+        }
+        return true;
+    }
+};
